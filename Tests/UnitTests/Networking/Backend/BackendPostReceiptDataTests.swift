@@ -832,6 +832,8 @@ class BackendPostReceiptDataTests: BaseBackendPostReceiptDataTests {
     }
 
     func testPostsJWSTokenWithProductDataCorrectly() throws {
+        self.createDependencies(storeKitVersion: .storeKit2)
+
         let path: HTTPRequest.Path = .postReceiptData
 
         httpClient.mock(
@@ -863,6 +865,8 @@ class BackendPostReceiptDataTests: BaseBackendPostReceiptDataTests {
     }
 
     func testPostsSK2XcodeReceiptWithProductDataCorrectly() throws {
+        self.createDependencies(storeKitVersion: .storeKit2)
+
         let path: HTTPRequest.Path = .postReceiptData
 
         httpClient.mock(
