@@ -30,12 +30,32 @@ public enum StoreKitVersion: Int {
 }
 
 extension StoreKitVersion {
-    var versionString: String {
+
+    /// - Returns: `true` if SK2 is available in this device.
+    static var isStoreKit2Available: Bool {
+        if #available(iOS 15.0, tvOS 15.0, macOS 12.0, watchOS 8.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    /// - Returns: `true` if and only if SK2 is enabled and it's available.
+    var isStoreKit2EnabledAndAvailable: Bool {
         switch self {
-        case .storeKit1, .default:
-            return "1"
-        case .storeKit2:
-            return "2"
+        case .storeKit1, .default: return false
+        case .storeKit2: return Self.isStoreKit2Available
+        }
+    }
+
+}
+
+extension StoreKitVersion {
+    var versionString: String {
+        if isStoreKit2EnabledAndAvailable {
+            "2"
+        } else {
+            "1"
         }
     }
 }
