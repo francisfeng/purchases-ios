@@ -53,9 +53,9 @@ extension StoreKitVersion {
 extension StoreKitVersion {
     var versionString: String {
         if isStoreKit2EnabledAndAvailable {
-            "2"
+            return "2"
         } else {
-            "1"
+            return "1"
         }
     }
 }
