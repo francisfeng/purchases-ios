@@ -25,7 +25,7 @@ class StoreKit2IntegrationTests: StoreKit1IntegrationTests {
 class StoreKit2JWSIntegrationTests: StoreKit1IntegrationTests {
 
     override class var storeKit2Setting: StoreKit2Setting { return .enabledForCompatibleDevices }
-    override var usesStoreKit2JWS: Bool { true }
+    override class var storeKitVersion: StoreKitVersion { .storeKit2 }
 
 }
 
@@ -308,7 +308,7 @@ class StoreKit1IntegrationTests: BaseStoreKitIntegrationTests {
 
         // In JWS mode, transaction takes a bit longer to be processed after `approveAskToBuyTransaction`
         // We need to wait so `restorePurchases` actually posts it.
-        if self.usesStoreKit2JWS {
+        if Self.storeKitVersion == .storeKit2 {
             try? await Task.sleep(nanoseconds: DispatchTimeInterval.milliseconds(500).nanoseconds)
         }
 
